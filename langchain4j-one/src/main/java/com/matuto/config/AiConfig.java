@@ -1,13 +1,11 @@
 package com.matuto.config;
 
-import com.fasterxml.jackson.core.TokenStreamFactory;
 import com.matuto.service.ToolsService;
 import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.chat.StreamingChatLanguageModel;
 import dev.langchain4j.service.*;
-import org.apache.el.parser.Token;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -52,7 +50,7 @@ public class AiConfig {
     @Bean
     public Assistant assistant(ChatLanguageModel chatLanguageModel,
                                StreamingChatLanguageModel streamingChatLanguageModel
-    , ToolsService toolsService) {
+            , ToolsService toolsService) {
         ChatMemory chatMemory = MessageWindowChatMemory.withMaxMessages(10);
 
         // 为Assistant动态代理对象
@@ -72,7 +70,7 @@ public class AiConfig {
 
     @Bean
     public AssistantUnique assistantUnique(ChatLanguageModel chatLanguageModel,
-                                          StreamingChatLanguageModel streamingChatLanguageModel) {
+                                           StreamingChatLanguageModel streamingChatLanguageModel) {
         return AiServices.builder(AssistantUnique.class)
                 .chatLanguageModel(chatLanguageModel)
                 .streamingChatLanguageModel(streamingChatLanguageModel)
